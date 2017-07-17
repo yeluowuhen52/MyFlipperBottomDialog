@@ -3,7 +3,9 @@ package com.marsjiang.myflipperbottomdialog.bottomsheet;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialogFragment;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +16,8 @@ import android.widget.TextView;
 
 import com.marsjiang.myflipperbottomdialog.R;
 
+import static com.marsjiang.myflipperbottomdialog.R.id.rv_test;
+
 
 /**
  * BottomSheetFragment
@@ -21,9 +25,10 @@ import com.marsjiang.myflipperbottomdialog.R;
  */
 
 public class BottomSheetFragment extends BottomSheetDialogFragment {
-    private LinearLayout ll_bottom_sheet;
+    private CoordinatorLayout ll_bottom_sheet;
     private static Context mContext;
     private static LinearLayout mll_bottom;
+    private BottomSheetBehavior mBehavior;
 
     public static BottomSheetFragment getInstance(Context context, LinearLayout ll_bottom) {
         mContext = context;
@@ -37,15 +42,20 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View ll_bottom_sheet_layout = inflater.inflate(R.layout.fragment_bottom_sheet, container, false);
         //设定弹出评论区域高度
-        ll_bottom_sheet = (LinearLayout) ll_bottom_sheet_layout.findViewById(R.id.ll_bottom_sheet);
-        ll_bottom_sheet.setLayoutParams(new LinearLayout.LayoutParams(mll_bottom.getWidth(), mll_bottom.getHeight()));
+        ll_bottom_sheet = (CoordinatorLayout) ll_bottom_sheet_layout.findViewById(R.id.ll_bottom_sheet);
+        RecyclerView rv_test = (RecyclerView) ll_bottom_sheet_layout.findViewById(R.id.rv_test);
+//        int a = mll_bottom.getWidth();
+//        int da = mll_bottom.getHeight();
+//        ll_bottom_sheet.setLayoutParams(new CoordinatorLayout.LayoutParams(mll_bottom.getWidth(), mll_bottom.getHeight()));
+//        mBehavior = BottomSheetBehavior.from(rv_test);
+//        mBehavior.setPeekHeight(mll_bottom.getHeight());
         return ll_bottom_sheet_layout;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.rv_test);
+        RecyclerView mRecyclerView = (RecyclerView) view.findViewById(rv_test);
         new ListAdapter(mRecyclerView);
     }
 
