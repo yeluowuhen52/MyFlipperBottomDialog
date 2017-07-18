@@ -34,6 +34,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
         mContext = context;
         mll_bottom = ll_bottom;
         BottomSheetFragment fragment = new BottomSheetFragment();
+
         return fragment;
     }
 
@@ -43,12 +44,16 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
         View ll_bottom_sheet_layout = inflater.inflate(R.layout.fragment_bottom_sheet, container, false);
         //设定弹出评论区域高度
         ll_bottom_sheet = (CoordinatorLayout) ll_bottom_sheet_layout.findViewById(R.id.ll_bottom_sheet);
-        RecyclerView rv_test = (RecyclerView) ll_bottom_sheet_layout.findViewById(R.id.rv_test);
-//        int a = mll_bottom.getWidth();
-//        int da = mll_bottom.getHeight();
-//        ll_bottom_sheet.setLayoutParams(new CoordinatorLayout.LayoutParams(mll_bottom.getWidth(), mll_bottom.getHeight()));
-//        mBehavior = BottomSheetBehavior.from(rv_test);
-//        mBehavior.setPeekHeight(mll_bottom.getHeight());
+//        RecyclerView rv_test = (RecyclerView) ll_bottom_sheet_layout.findViewById(R.id.rv_test);
+        int a = mll_bottom.getWidth();
+        int da = mll_bottom.getHeight();
+        CoordinatorLayout.LayoutParams layoutParams = new CoordinatorLayout.LayoutParams(a, da);
+        BottomSheetBehavior bottomSheetBehavior = new BottomSheetBehavior();
+        bottomSheetBehavior.setPeekHeight(da);
+        bottomSheetBehavior.setHideable(true);
+        layoutParams.setBehavior(bottomSheetBehavior);
+        ll_bottom_sheet.setLayoutParams(layoutParams);
+
         return ll_bottom_sheet_layout;
     }
 
